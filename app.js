@@ -123,7 +123,6 @@
       links.setAttribute("aria-label", "Links for " + publication.title);
 
       if (publication.arxivUrl) links.append(makeExternalLink("arXiv", publication.arxivUrl));
-      if (publication.pdfUrl) links.append(makeExternalLink("PDF", publication.pdfUrl));
       if (publication.journalUrl) links.append(makeExternalLink("Journal", publication.journalUrl));
 
       body.append(title, citation, details, links);

@@ -57,7 +57,6 @@ this block and replace the text inside quotation marks:
   title: "Paper title",
   authors: "Author One and Author Two",
   arxivUrl: "https://arxiv.org/abs/0000.00000",
-  pdfUrl: "https://arxiv.org/pdf/0000.00000",
   journalUrl: ""
 },
 ```

@@ -33,7 +33,6 @@ window.SITE_DATA = {
       title: "Second-order fluctuations for a phase transition in random partitions",
       authors: "Jaime Garza and Yizao Wang",
       arxivUrl: "https://arxiv.org/abs/2607.01946",
-      pdfUrl: "https://arxiv.org/pdf/2607.01946",
       journalUrl: ""
     },
     {
@@ -42,7 +41,6 @@ window.SITE_DATA = {
       title: "Itô integral for a two-sided Lévy process",
       authors: "Raluca M. Balan and Jaime Garza",
       arxivUrl: "https://arxiv.org/abs/2605.12269",
-      pdfUrl: "https://arxiv.org/pdf/2605.12269",
       journalUrl: ""
     },
     {
@@ -51,7 +49,6 @@ window.SITE_DATA = {
       title: "A functional central limit theorem for weighted occupancy processes of the Karlin model",
       authors: "Jaime Garza and Yizao Wang",
       arxivUrl: "https://arxiv.org/abs/2412.02160",
-      pdfUrl: "https://arxiv.org/pdf/2412.02160",
       journalUrl: ""
     },
     {
@@ -60,7 +57,6 @@ window.SITE_DATA = {
       title: "Limit theorems for random permutations induced by Chinese restaurant processes",
       authors: "Jaime Garza and Yizao Wang",
       arxivUrl: "https://arxiv.org/abs/2412.02162",
-      pdfUrl: "https://arxiv.org/pdf/2412.02162",
       journalUrl: ""
     }
   ],
