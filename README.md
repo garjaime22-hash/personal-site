@@ -6,8 +6,7 @@ service, or complicated framework.
 The site uses a traditional academic structure:
 
 - Home / biography
-- Research
-- Publications
+- Research and publications
 - Contact
 
 ## The one file you normally edit
@@ -78,8 +77,8 @@ recent working version, or ask ChatGPT to inspect the edited section.
 | --- | --- |
 | `site-data.js` | All routine text, links, research areas, and publications |
 | `index.html` | Home / biography page |
-| `research.html` | Research page |
-| `publications.html` | Publications page |
+| `research.html` | Combined research and publications page |
+| `publications.html` | Redirect for the former publications URL |
 | `contact.html` | Contact page |
 | `styles.css` | Colors, typography, spacing, and mobile layout |
 | `app.js` | Places the information from `site-data.js` onto every page |

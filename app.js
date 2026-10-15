@@ -15,7 +15,6 @@
     institution: data.institution,
     location: data.location,
     intro: data.intro,
-    "research-overview": data.researchOverview,
     "contact-text": data.contactText,
     "current-year": new Date().getFullYear()
   };
@@ -68,8 +67,7 @@
 
   const pageTitles = {
     home: data.name + " | Probability Researcher",
-    research: "Research | " + data.name,
-    publications: "Publications | " + data.name,
+    research: "Research and publications | " + data.name,
     contact: "Contact | " + data.name
   };
   document.title = pageTitles[page] || data.name;
@@ -87,23 +85,6 @@
     link.textContent = label;
     return link;
   };
-
-  const researchList = document.getElementById("research-list");
-  if (researchList) {
-    (data.researchAreas || []).forEach(function (area) {
-      const section = document.createElement("section");
-      section.className = "research-topic";
-
-      const heading = document.createElement("h2");
-      heading.textContent = area.title;
-
-      const descriptionText = document.createElement("p");
-      descriptionText.textContent = area.description;
-
-      section.append(heading, descriptionText);
-      researchList.append(section);
-    });
-  }
 
   const publicationList = document.getElementById("publication-list");
   if (publicationList) {

@@ -23,28 +23,7 @@ window.SITE_DATA = {
   cvUrl: "",
 
   intro:
-    "I work in probability and stochastic processes, with a focus on limit theorems, random combinatorial structures, and stochastic analysis.",
-
-  researchOverview:
-    "My research studies how complex random systems behave at large scales. I am particularly interested in asymptotic phenomena that connect stochastic models, combinatorial structures, and analysis.",
-
-  researchAreas: [
-    {
-      title: "Limit theorems",
-      description:
-        "Functional central limit theorems, second-order fluctuations, and scaling limits for stochastic systems."
-    },
-    {
-      title: "Random structures",
-      description:
-        "Occupancy schemes, random partitions, Chinese restaurant processes, and random permutation matrices."
-    },
-    {
-      title: "Stochastic analysis",
-      description:
-        "Lévy processes, Poisson–Malliavin calculus, stochastic integration, and stochastic partial differential equations."
-    }
-  ],
+    "Infinite urn schemes, random partitions and permutations, and SPDEs.",
 
   // Publications appear in this order. Put the newest item first.
   publications: [
