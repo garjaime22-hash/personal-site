@@ -8,32 +8,78 @@
     return;
   }
 
-  const byId = (id) => document.getElementById(id);
-
-  const setText = (id, value) => {
-    const element = byId(id);
-    if (element && value) element.textContent = value;
+  const fieldValues = {
+    name: data.name,
+    initials: data.initials,
+    role: data.role,
+    institution: data.institution,
+    location: data.location,
+    intro: data.intro,
+    "research-overview": data.researchOverview,
+    "contact-text": data.contactText,
+    "current-year": new Date().getFullYear()
   };
 
-  const configureLink = (id, url, options = {}) => {
-    const element = byId(id);
-    if (!element) return;
+  Object.entries(fieldValues).forEach(function (entry) {
+    const field = entry[0];
+    const value = entry[1];
+    if (!value) return;
 
-    if (!url) {
-      element.hidden = true;
-      return;
-    }
+    document.querySelectorAll('[data-field="' + field + '"]').forEach(function (element) {
+      element.textContent = value;
+    });
+  });
 
-    element.hidden = false;
-    element.href = url;
-
-    if (options.external !== false && !url.startsWith("mailto:")) {
-      element.target = "_blank";
-      element.rel = "noopener noreferrer";
-    }
+  const linkValues = {
+    email: data.email ? "mailto:" + data.email : "",
+    scholar: data.scholarUrl,
+    arxiv: data.arxivUrl,
+    orcid: data.orcidUrl,
+    cv: data.cvUrl
   };
 
-  const makeExternalLink = (label, url) => {
+  Object.entries(linkValues).forEach(function (entry) {
+    const kind = entry[0];
+    const url = entry[1];
+
+    document.querySelectorAll('[data-link="' + kind + '"]').forEach(function (element) {
+      if (!url) {
+        element.hidden = true;
+        return;
+      }
+
+      element.hidden = false;
+      element.href = url;
+
+      if (element.hasAttribute("data-use-email-address")) {
+        element.textContent = data.email;
+      }
+
+      if (kind !== "email") {
+        element.target = "_blank";
+        element.rel = "noopener noreferrer";
+      }
+    });
+  });
+
+  const page = document.body.dataset.page || "home";
+  const activeNavigationLink = document.querySelector('[data-nav="' + page + '"]');
+  if (activeNavigationLink) activeNavigationLink.setAttribute("aria-current", "page");
+
+  const pageTitles = {
+    home: data.name + " | Probability Researcher",
+    research: "Research | " + data.name,
+    publications: "Publications | " + data.name,
+    contact: "Contact | " + data.name
+  };
+  document.title = pageTitles[page] || data.name;
+
+  const description = document.querySelector('meta[name="description"]');
+  if (description && page === "home") {
+    description.content = data.name + " — " + data.role + " at " + data.institution + ".";
+  }
+
+  const makeExternalLink = function (label, url) {
     const link = document.createElement("a");
     link.href = url;
     link.target = "_blank";
@@ -42,103 +88,66 @@
     return link;
   };
 
-  document.title = `${data.name} | Probability Researcher`;
+  const researchList = document.getElementById("research-list");
+  if (researchList) {
+    (data.researchAreas || []).forEach(function (area) {
+      const section = document.createElement("section");
+      section.className = "research-topic";
 
-  const description = document.querySelector('meta[name="description"]');
-  if (description) {
-    description.content = `${data.name} — ${data.role} at ${data.institution}. Research, publications, and contact information.`;
+      const heading = document.createElement("h2");
+      heading.textContent = area.title;
+
+      const descriptionText = document.createElement("p");
+      descriptionText.textContent = area.description;
+
+      section.append(heading, descriptionText);
+      researchList.append(section);
+    });
   }
 
-  setText("header-name", data.name);
-  setText("intro-role", data.role);
-  setText("page-title", data.name);
-  setText("intro-institution", data.institution);
-  setText("intro-location", data.location);
-  setText("intro-text", data.intro);
-  setText("research-overview", data.researchOverview);
-  setText("contact-text", data.contactText);
-  setText("footer-name", data.name);
-  setText("current-year", new Date().getFullYear());
+  const publicationList = document.getElementById("publication-list");
+  if (publicationList) {
+    const publications = data.publications || [];
 
-  const mailto = data.email ? `mailto:${data.email}` : "";
-  configureLink("intro-email-link", mailto, { external: false });
-  configureLink("intro-scholar-link", data.scholarUrl);
-  configureLink("intro-arxiv-link", data.arxivUrl);
-  configureLink("intro-orcid-link", data.orcidUrl);
-  configureLink("intro-cv-link", data.cvUrl);
-  configureLink("nav-cv-link", data.cvUrl);
-  configureLink("publications-scholar-link", data.scholarUrl);
-  configureLink("contact-scholar-link", data.scholarUrl);
-  configureLink("contact-arxiv-link", data.arxivUrl);
-  configureLink("contact-orcid-link", data.orcidUrl);
-  configureLink("contact-cv-link", data.cvUrl);
+    publications.forEach(function (publication, index) {
+      const item = document.createElement("li");
+      item.className = "publication";
 
-  const emailLink = byId("contact-email");
-  if (emailLink && data.email) {
-    emailLink.textContent = data.email;
-    emailLink.href = mailto;
-  } else if (emailLink) {
-    emailLink.hidden = true;
+      const number = document.createElement("span");
+      number.className = "publication-number";
+      number.textContent = "[" + (publications.length - index) + "]";
+      number.setAttribute("aria-hidden", "true");
+
+      const body = document.createElement("div");
+      body.className = "publication-body";
+
+      const title = document.createElement("h2");
+      const titleUrl = publication.journalUrl || publication.arxivUrl;
+      if (titleUrl) {
+        title.append(makeExternalLink(publication.title, titleUrl));
+      } else {
+        title.textContent = publication.title;
+      }
+
+      const citation = document.createElement("p");
+      citation.className = "publication-citation";
+      citation.textContent = publication.authors;
+
+      const details = document.createElement("p");
+      details.className = "publication-details";
+      details.textContent = [publication.status, publication.year].filter(Boolean).join(" · ");
+
+      const links = document.createElement("div");
+      links.className = "publication-links";
+      links.setAttribute("aria-label", "Links for " + publication.title);
+
+      if (publication.arxivUrl) links.append(makeExternalLink("arXiv", publication.arxivUrl));
+      if (publication.pdfUrl) links.append(makeExternalLink("PDF", publication.pdfUrl));
+      if (publication.journalUrl) links.append(makeExternalLink("Journal", publication.journalUrl));
+
+      body.append(title, citation, details, links);
+      item.append(number, body);
+      publicationList.append(item);
+    });
   }
-
-  const researchList = byId("research-list");
-  (data.researchAreas || []).forEach((area) => {
-    const article = document.createElement("article");
-    article.className = "research-topic";
-
-    const heading = document.createElement("h3");
-    heading.textContent = area.title;
-
-    const descriptionText = document.createElement("p");
-    descriptionText.textContent = area.description;
-
-    article.append(heading, descriptionText);
-    researchList.append(article);
-  });
-
-  const publicationList = byId("publication-list");
-  (data.publications || []).forEach((publication) => {
-    const article = document.createElement("article");
-    article.className = "publication";
-
-    const year = document.createElement("p");
-    year.className = "publication-year";
-    year.textContent = publication.year;
-
-    const body = document.createElement("div");
-    body.className = "publication-body";
-
-    const title = document.createElement("h3");
-    if (publication.arxivUrl || publication.journalUrl) {
-      title.append(makeExternalLink(publication.title, publication.journalUrl || publication.arxivUrl));
-    } else {
-      title.textContent = publication.title;
-    }
-
-    const authors = document.createElement("p");
-    authors.className = "publication-authors";
-    authors.textContent = publication.authors;
-
-    const status = document.createElement("p");
-    status.className = "publication-status";
-    status.textContent = publication.status;
-
-    const summary = document.createElement("p");
-    summary.className = "publication-summary";
-    summary.textContent = publication.summary;
-
-    const links = document.createElement("div");
-    links.className = "publication-links";
-    links.setAttribute("aria-label", `Links for ${publication.title}`);
-
-    if (publication.arxivUrl) links.append(makeExternalLink("arXiv", publication.arxivUrl));
-    if (publication.pdfUrl) links.append(makeExternalLink("PDF", publication.pdfUrl));
-    if (publication.journalUrl) links.append(makeExternalLink("Journal", publication.journalUrl));
-
-    body.append(title, authors, status);
-    if (publication.summary) body.append(summary);
-    body.append(links);
-    article.append(year, body);
-    publicationList.append(article);
-  });
 })();

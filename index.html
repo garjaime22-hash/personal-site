@@ -3,17 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta
-      name="description"
-      content="Jaime Garza is a probability researcher and postdoctoral fellow at the University of Ottawa."
-    >
-    <meta name="theme-color" content="#fbfbf9">
+    <meta name="description" content="Jaime Garza is a probability researcher and postdoctoral fellow at the University of Ottawa.">
+    <meta name="theme-color" content="#ffffff">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Jaime Garza | Probability Researcher">
-    <meta
-      property="og:description"
-      content="Research, publications, and contact information for Jaime Garza."
-    >
+    <meta property="og:description" content="Research, publications, and contact information for Jaime Garza.">
     <link rel="canonical" href="https://garjaime22-hash.github.io/personal-site/">
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
@@ -21,76 +15,57 @@
     <script src="site-data.js" defer></script>
     <script src="app.js" defer></script>
   </head>
-  <body>
+  <body data-page="home">
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
-    <header class="site-header" id="top">
-      <div class="site-shell header-inner">
-        <a class="site-name" id="header-name" href="#top">Jaime Garza</a>
-        <nav class="site-nav" aria-label="Primary navigation">
-          <a href="#research">Research</a>
-          <a href="#publications">Publications</a>
-          <a href="#contact">Contact</a>
-          <a id="nav-cv-link" href="#" hidden>CV</a>
-        </nav>
-      </div>
+    <header class="site-header">
+      <nav class="site-shell site-nav" aria-label="Primary navigation">
+        <a href="index.html" data-nav="home">Home</a>
+        <a href="research.html" data-nav="research">Research</a>
+        <a href="publications.html" data-nav="publications">Publications</a>
+        <a href="contact.html" data-nav="contact">Contact</a>
+        <a href="#" data-link="cv" hidden>CV</a>
+      </nav>
     </header>
 
-    <main class="site-shell" id="main-content">
-      <section class="intro" aria-labelledby="page-title">
-        <p class="role" id="intro-role">Postdoctoral Fellow in Probability</p>
-        <h1 id="page-title">Jaime Garza</h1>
-        <p class="affiliation">
-          <span id="intro-institution">University of Ottawa</span>
-          <span aria-hidden="true"> · </span>
-          <span id="intro-location">Ottawa, Canada</span>
-        </p>
-        <p class="intro-text" id="intro-text"></p>
-        <div class="profile-links" aria-label="Academic profiles and contact">
-          <a id="intro-email-link" href="#">Email</a>
-          <a id="intro-scholar-link" href="#">Google Scholar</a>
-          <a id="intro-arxiv-link" href="#">arXiv</a>
-          <a id="intro-orcid-link" href="#" hidden>ORCID</a>
-          <a id="intro-cv-link" href="#" hidden>CV</a>
+    <main class="site-shell page-grid" id="main-content">
+      <aside class="profile-panel" aria-label="Profile">
+        <div class="profile-monogram" data-field="initials" aria-hidden="true">JG</div>
+        <h2 class="profile-name" data-field="name">Jaime Garza</h2>
+        <p class="profile-role" data-field="role">Postdoctoral Fellow in Probability</p>
+        <p class="profile-institution" data-field="institution">University of Ottawa</p>
+        <p class="profile-location" data-field="location">Ottawa, Canada</p>
+        <div class="profile-links" aria-label="Academic profiles">
+          <a href="#" data-link="email">Email</a>
+          <a href="#" data-link="scholar">Google Scholar</a>
+          <a href="#" data-link="arxiv">arXiv</a>
+          <a href="#" data-link="orcid" hidden>ORCID</a>
+          <a href="#" data-link="cv" hidden>CV</a>
         </div>
-      </section>
+      </aside>
 
-      <section class="content-section" id="research" aria-labelledby="research-heading">
-        <h2 id="research-heading">Research</h2>
-        <p class="section-intro" id="research-overview"></p>
-        <div class="research-list" id="research-list"></div>
-      </section>
+      <article class="page-content">
+        <h1>Biography</h1>
+        <p class="lead" data-field="intro"></p>
 
-      <section class="content-section" id="publications" aria-labelledby="publications-heading">
-        <div class="section-title-row">
-          <h2 id="publications-heading">Publications and preprints</h2>
-          <a id="publications-scholar-link" href="#">Google Scholar</a>
-        </div>
-        <div class="publication-list" id="publication-list"></div>
-      </section>
+        <section class="detail-block" aria-labelledby="affiliation-heading">
+          <h2 id="affiliation-heading">Affiliation</h2>
+          <p><span data-field="institution"></span><br><span data-field="location"></span></p>
+        </section>
 
-      <section class="content-section contact-section" id="contact" aria-labelledby="contact-heading">
-        <h2 id="contact-heading">Contact</h2>
-        <p id="contact-text"></p>
-        <p><a class="email-link" id="contact-email" href="#"></a></p>
-        <div class="contact-links" aria-label="Additional academic links">
-          <a id="contact-scholar-link" href="#">Google Scholar</a>
-          <a id="contact-arxiv-link" href="#">arXiv</a>
-          <a id="contact-orcid-link" href="#" hidden>ORCID</a>
-          <a id="contact-cv-link" href="#" hidden>Curriculum vitae</a>
-        </div>
-      </section>
+        <section class="detail-block" aria-labelledby="email-heading">
+          <h2 id="email-heading">Email</h2>
+          <p><a href="#" data-link="email" data-use-email-address></a></p>
+        </section>
+      </article>
     </main>
 
     <footer class="site-footer">
       <div class="site-shell footer-inner">
-        <p>© <span id="current-year"></span> <span id="footer-name">Jaime Garza</span></p>
-        <a href="#top">Back to top</a>
+        <p>© <span data-field="current-year"></span> <span data-field="name">Jaime Garza</span></p>
       </div>
     </footer>
 
-    <noscript>
-      <p class="noscript-message">This site needs JavaScript enabled to display its content.</p>
-    </noscript>
+    <noscript><p class="noscript-message">This site needs JavaScript enabled to display its content.</p></noscript>
   </body>
 </html>
