@@ -62,5 +62,5 @@ window.SITE_DATA = {
   ],
 
   contactText:
-    "For questions about my work, seminar invitations, or possible collaborations, feel free to get in touch."
+    "For questions about my work feel free to get in touch."
 };
